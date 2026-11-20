@@ -1,0 +1,46 @@
+# Schaufenster
+
+Vorlagen und Werkzeuge vom Kollektiv Parzival 3000 — zum Kopieren, Nachbauen, Weitergeben.
+Ein Projekt ist ein Ordner.
+
+## Projekte
+
+| Projekt | Worum es geht | Quest |
+|---|---|---|
+| [TreibHolz](./treibholz/) | Obsidian-Vault für eine reisende Treibholz-Marke: Strand → Werkstatt → Netz, mit Skills für Claude Code. | [parzival-3000.com/quests/treibholz](https://www.parzival-3000.com/quests/treibholz) |
+| [trendrider](./trendrider/) | Die Regeln der Trendfolger-Schule, an echten Kursdaten gegen blinden Einstieg nachgemessen — Mess-Skripte (Python). | — |
+
+## Herunterladen
+
+Auf GitHub **Code → Download ZIP** (lädt das ganze Schaufenster), darin den Projekt-Ordner,
+z. B. `treibholz`, als Vault in Obsidian öffnen. Alternativ `git clone`.
+
+## Prüfen
+
+Das Repo ist öffentlich, deshalb prüft ein Hook vor jedem Push. Nach dem Klonen einmal:
+
+```bash
+git config core.hooksPath hooks
+```
+
+Der Hook `hooks/pre-push` prüft jeden Commit, der gepusht wird — Dateistand, Nachricht, Autor- und
+Committer-E-Mail (nur `…@users.noreply.github.com`) — mit `node scripts/pruefen.mjs --commit <sha>`,
+danach `npm test` (Node ≥ 22, keine Abhängigkeiten). Bei einem Fund verweigert er den Push.
+Dieselbe Prüfung des Arbeitsstands läuft danach als GitHub-Action.
+
+Der Sucher meldet Namen aus der Sperrliste, E-Mail-Adressen, Telefonnummern, Schlüssel,
+Koordinaten und what3words-Adressen außerhalb der Erlaubnisliste des Ordners, ungeprüfte
+Binärdateien, Ordner ohne `LICENSE` und Ordner, die hier nicht aufgeführt sind.
+Neues Wort für die Sperrliste: `node scripts/pruefen.mjs --hash "Wort"` und die Zeile in `SPERRLISTE` eintragen.
+
+## Lizenzen
+
+Jeder Ordner trägt seine eigene `LICENSE`:
+
+| Teil | Lizenz |
+|---|---|
+| `treibholz/` | CC BY 4.0 |
+| `trendrider/` | Texte CC BY 4.0, Skripte MIT |
+| Hilfsskripte (`scripts/`, `hooks/`, `.github/`) | MIT (`LICENSE` im Root) |
+
+Rechteinhaber: Kollektiv Parzival 3000.
